@@ -43,6 +43,7 @@ services:
 
   portainer:
     image: portainer/portainer-ce:latest
+    container_name: portainer
     command: -H unix:///var/run/docker.sock
     restart: always
     env_file:
@@ -69,3 +70,7 @@ services:
 
 volumes:
   portainer_data:
+  
+networks:
+  default:
+    name: traefik-secure-line
