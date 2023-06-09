@@ -40,6 +40,9 @@ services:
       - "traefik.http.routers.http-catchall.entrypoints=web"
       - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "--experimental.plugins.traefik-kuzzle-auth.modulename=github.com/alexandrebouthinon/traefik-kuzzle-auth"
+      - "--experimental.plugins.traefik-kuzzle-auth.version=v0.2.0"
+
 
   portainer:
     image: portainer/portainer-ce:latest
