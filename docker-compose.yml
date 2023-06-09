@@ -34,6 +34,7 @@ services:
       - 'traefik.http.services.api@internal.loadbalancer.server.port=8080' # Required in swarms, https://doc.traefik.io/traefik/v2.0/routing/providers/docker/#services
       - 'traefik.http.routers.traefik.middlewares=traefik-auth'
       - 'traefik.http.middlewares.traefik-dashboard-auth.basicauth.users: ${TRAEFIK_AUTH_PAIRS}'
+      - 'traefik.http.middlewares.test-auth.basicauth.users: ${TRAEFIK_AUTH_PAIRS},'
       - 'traefik.http.routers.traefik.middlewares=strip'
       - 'traefik.http.middlewares.strip.stripprefix.prefixes=/traefik'
       - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"

@@ -14,9 +14,10 @@ function create_env_file() {
     printf "Enter DOMAIN: "
     read DOMAIN
     printf "AUTH PAIRS provides an easy way of defining basic auth to make sure only authorized users can access the dashboard.\n"
-    printf "Enter AUTH PAIRS in the format username:password\n\n"
+    printf "Enter PAIRs in this way username password , make sure to provide the space \n\n"
     printf "Enter TRAEFIK_AUTH_PAIRS: "
     read TRAEFIK_AUTH_PAIRS
+    TRAEFIK_AUTH_PAIRS=$(htpasswd -nbB $TRAEFIK_AUTH_PAIRS)
     # Create .env file with the values
     cat > .env << EOF
 USER_EMAIL_ID=${USER_EMAIL_ID}
