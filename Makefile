@@ -2,7 +2,7 @@
 MAKEFLAGS += -j1
 .DEFAULT_GOAL := build_run
 
-.PHONY: dep_checks check_htpasswd install_htpasswd check_docker check_docker_compose install_docker install_docker_compose build_run
+.PHONY: dep_checks check_docker check_docker_compose check_htpasswd install_docker install_docker_compose install_htpasswd build_run
 
 dep_checks:
 	make check_docker
