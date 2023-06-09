@@ -14,8 +14,7 @@ check_htpasswd:
 	@htpasswd -nb bb bb || install_htpasswd
 
 install_htpasswd:
-	@echo "Installing htpasswd..."
-	@sudo apt-get install apache2-utils
+	sudo apt-get install apache2-utils
 
 check_docker:
 	@echo "Checking if Docker is installed and running..."
