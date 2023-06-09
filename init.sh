@@ -20,7 +20,7 @@ EOF
 
 
 # Ask for user input
-printf "Checking if .env is there already..."
+printf "Checking if .env is there already...\n"
 if [ -f .env ]; then
     # Print env file contents
     printf ".env file exists. Printing contents...\n"
@@ -39,7 +39,7 @@ if [ -f .env ]; then
     fi
 else
     printf ".env file does not exist. Creating new .env file...\n"
-    domain=$(create_env_file)
+    create_env_file
     printf ".env file created successfully\n"
 fi
 
