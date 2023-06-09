@@ -25,4 +25,8 @@ chmod 600 acme.json
 
 printf "acme.json file created successfully\n"
 
+printf "Starting docker-compose...\n"
+
+docker-compose up -d --build
+
 printf "Your Portainer should be accesible at https://console.${DOMAIN}\n"

@@ -41,4 +41,4 @@ build_run:
 	@echo "######################################"
 	@echo "##All Build Steps Passed. Please configure now.##"
 	make init
-	docker-compose up -d --build
+
