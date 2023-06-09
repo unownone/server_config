@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 function create_env_file() {
     printf "Enter USER_EMAIL_ID to be used for LetsEncrypt"
     printf "Enter USER_EMAIL_ID: \n"
@@ -32,15 +31,15 @@ if [ -f .env ]; then
     domain=""
     if [ "$CONTINUE" = "y" ]; then
         printf "Continuing with existing .env file...\n"
+        domain=$(grep DOMAIN .env | cut -d= -f2)
     else
         printf "Creating new env file\n"
-        domain=$(create_env_file | awk '{print $1}')
+        domain=$(create_env_file)
         printf ".env file created successfully\n"
-        exit 1
     fi
 else
     printf ".env file does not exist. Creating new .env file...\n"
-    domain=$(create_env_file | awk '{print $1}')
+    domain=$(create_env_file)
     printf ".env file created successfully\n"
 fi
 
