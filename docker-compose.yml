@@ -21,9 +21,6 @@ services:
       - --certificatesresolvers.leresolver.acme.email=${USER_EMAIL_ID} 
       - --certificatesresolvers.leresolver.acme.storage=./acme.json
       - --certificatesresolvers.leresolver.acme.httpchallenge.entrypoint=web
-      - --tracing=true
-      - --tracing.serviceName=traefik
-      - --tracing.spanNameLimit=0
     ports:
       - "80:80"
       - "443:443"
