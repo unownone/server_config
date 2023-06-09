@@ -1,23 +1,46 @@
 #!/bin/sh
 
-# Ask for user input
-printf "Enter `USER_EMAIL_ID` to be used for LetsEncrypt \n"
-printf "Enter USER_EMAIL_ID: \n "
-read USER_EMAIL_ID
-printf "Enter DOMAIN to be used for routing. Make sure it is a top level domain. example `example.com` \n"
-printf "Enter DOMAIN: "
-read DOMAIN
-printf "Enter TRAEFIK_AUTH_PAIRS (Optional): "
-read TRAEFIK_AUTH_PAIRS
 
-# Create .env file with the values
-cat > .env << EOF
+function create_env_file() {
+    printf "Enter USER_EMAIL_ID to be used for LetsEncrypt"
+    printf "Enter USER_EMAIL_ID: \n"
+    read USER_EMAIL_ID
+    printf "Enter DOMAIN to be used for routing. Make sure it is a top level domain. example example.com"
+    printf "Enter DOMAIN: "
+    read DOMAIN
+    printf "Enter TRAEFIK_AUTH_PAIRS (Optional): "
+    read TRAEFIK_AUTH_PAIRS
+    # Create .env file with the values
+    cat > .env << EOF
 USER_EMAIL_ID=${USER_EMAIL_ID}
 DOMAIN=${DOMAIN}
 TRAEFIK_AUTH_PAIRS=${TRAEFIK_AUTH_PAIRS}
 EOF
+}
 
-printf ".env file created successfully\n"
+
+# Ask for user input
+printf "Checking if .env is there already..."
+if [ -f .env ]; then
+    # Print env file contents
+    printf ".env file exists. Printing contents...\n"
+    cat .env
+    printf "\n"
+    printf "Do you want to continue with the existing .env file? (y/n): "
+    read CONTINUE
+    if [ "$CONTINUE" = "y" ]; then
+        printf "Continuing with existing .env file...\n"
+    else
+        printf "Creating new env file\n"
+        create_env_file
+        printf ".env file created successfully\n"
+        exit 1
+    fi
+else
+    printf ".env file does not exist. Creating new .env file...\n"
+    create_env_file
+    printf ".env file created successfully\n"
+fi
 
 # Create acme.json file with correct permissions
 touch acme.json
