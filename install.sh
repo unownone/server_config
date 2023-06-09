@@ -32,4 +32,4 @@ git clone https://github.com/unownone/server_config.git
 cd server_config
 
 # Run make
-make
+make -i -s
