@@ -1,16 +1,17 @@
+.SILENT: run
 MAKEFLAGS += -j1
 .DEFAULT_GOAL := build_run
 
-.PHONY: dep_checks check_docker check_docker_compose install_docker install_docker_compose build_run check_htpasswd install_htpasswd
+.PHONY: dep_checks check_htpasswd install_htpasswd check_docker check_docker_compose install_docker install_docker_compose build_run
 
 dep_checks:
-	make check_htpasswd
 	make check_docker
 	make check_docker_compose
+	make check_htpasswd
 
 check_htpasswd:
 	@echo "Checking if htpasswd is installed and running..."
-	@htpasswd -v || install_htpasswd
+	@htpasswd -nb bb bb || install_htpasswd
 
 install_htpasswd:
 	@echo "Installing htpasswd..."

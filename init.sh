@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Declare a global variable
-declare -g DOMAIN=""
+DOMAIN=""
 
 function create_env_file() {
     printf "#############################################\n"
