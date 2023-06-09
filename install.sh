@@ -116,11 +116,18 @@ fi
 
 
 
-# Clone the repository
-git clone https://github.com/unownone/server_config.git
-
-# Change to the repository directory
-cd server_config
+# check if server_config is already there or not
+if [ -d "server_config" ]; then
+    echo "server_config is already there"
+    echo "Updating server_config"
+    cd server_config
+    git pull
+else
+    echo "server_config is not there"
+    echo "Cloning server_config"
+    git clone https://github.com/unownone/server_config.git
+    cd server_config
+fi
 
 # Initialize the .env file
 # Get environment and execute init.sh script
