@@ -1,7 +1,20 @@
 MAKEFLAGS += -j1
 .DEFAULT_GOAL := build_run
 
-.PHONY: check_docker check_docker_compose install_docker install_docker_compose build_run
+.PHONY: dep_checks check_docker check_docker_compose install_docker install_docker_compose build_run check_htpasswd install_htpasswd
+
+dep_checks:
+	make check_htpasswd
+	make check_docker
+	make check_docker_compose
+
+check_htpasswd:
+	@echo "Checking if htpasswd is installed and running..."
+	@htpasswd -v || install_htpasswd
+
+install_htpasswd:
+	@echo "Installing htpasswd..."
+	@sudo apt-get install apache2-utils
 
 check_docker:
 	@echo "Checking if Docker is installed and running..."
@@ -37,9 +50,8 @@ build_run:
 	@echo " \____\___/|_| |_|_| |_|\__, |"
 	@echo "                        |___/ "
 	@echo ""
-	make check_docker 
-	make check_docker_compose
-	@echo "######################################"
-	@echo "##All Build Steps Passed. Please configure now.##"
+	make dep_checks
+	@echo "###################################################"
+	@echo "## All Build Steps Passed. Please configure now. ##"
 	make init
 
