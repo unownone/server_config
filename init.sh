@@ -1,10 +1,16 @@
 #!/bin/sh
 
+# Declare a global variable
+declare -g DOMAIN=""
+
 function create_env_file() {
-    printf "Enter USER_EMAIL_ID to be used for LetsEncrypt"
+    printf "#############################################\n"
+    printf "########### Provide ENV values ##############\n"
+    printf "#############################################\n\n"
+    printf "Enter USER_EMAIL_ID to be used for LetsEncrypt\n"
     printf "Enter USER_EMAIL_ID: \n"
     read USER_EMAIL_ID
-    printf "Enter DOMAIN to be used for routing. Make sure it is a top level domain. example example.com"
+    printf "Enter DOMAIN to be used for routing.\n Make sure it is a top level domain. example example.com\n"
     printf "Enter DOMAIN: "
     read DOMAIN
     printf "Enter TRAEFIK_AUTH_PAIRS (Optional): "
@@ -15,7 +21,6 @@ USER_EMAIL_ID=${USER_EMAIL_ID}
 DOMAIN=${DOMAIN}
 TRAEFIK_AUTH_PAIRS=${TRAEFIK_AUTH_PAIRS}
 EOF
-    echo "$DOMAIN"
 }
 
 
@@ -23,18 +28,21 @@ EOF
 printf "Checking if .env is there already...\n"
 if [ -f .env ]; then
     # Print env file contents
-    printf ".env file exists. Printing contents...\n"
+    printf ".env file exists.\n"
+    printf "#############################################\n"
+    printf "########### .env file contents ##############\n"
+    printf "#############################################\n\n"
     cat .env
-    printf "\n"
+    printf "\n\n"
     printf "Do you want to continue with the existing .env file? (y/n): "
     read CONTINUE
     domain=""
     if [ "$CONTINUE" = "y" ]; then
         printf "Continuing with existing .env file...\n"
-        domain=$(grep DOMAIN .env | cut -d= -f2)
+        DOMAIN=$(grep DOMAIN .env | cut -d= -f2)
     else
         printf "Creating new env file\n"
-        domain=$(create_env_file)
+        create_env_file
         printf ".env file created successfully\n"
     fi
 else
@@ -53,4 +61,4 @@ printf "Starting docker-compose...\n"
 
 docker-compose up -d --build
 
-printf "Your Portainer should be accesible at https://console.${domain}\n"
+printf "Your Portainer should be accesible at https://console.${DOMAIN}\n"
