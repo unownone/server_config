@@ -6,14 +6,16 @@ declare -g DOMAIN=""
 function create_env_file() {
     printf "#############################################\n"
     printf "########### Provide ENV values ##############\n"
-    printf "#############################################\n\n"
+    printf "#############################################\n\n\n"
     printf "Enter USER_EMAIL_ID to be used for LetsEncrypt\n"
-    printf "Enter USER_EMAIL_ID: \n"
+    printf "Enter USER_EMAIL_ID: "
     read USER_EMAIL_ID
     printf "Enter DOMAIN to be used for routing.\n Make sure it is a top level domain. example example.com\n"
     printf "Enter DOMAIN: "
     read DOMAIN
-    printf "Enter TRAEFIK_AUTH_PAIRS (Optional): "
+    printf "AUTH PAIRS provides an easy way of defining basic auth to make sure only authorized users can access the dashboard.\n"
+    printf "Enter AUTH PAIRS in the format username:password\n\n"
+    printf "Enter TRAEFIK_AUTH_PAIRS: "
     read TRAEFIK_AUTH_PAIRS
     # Create .env file with the values
     cat > .env << EOF
