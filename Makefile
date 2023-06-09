@@ -1,3 +1,4 @@
+MAKEFLAGS += -j1
 .DEFAULT_GOAL := build_run
 
 .PHONY: check_docker check_docker_compose install_docker install_docker_compose build_run
