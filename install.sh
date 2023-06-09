@@ -124,4 +124,4 @@ cd server_config
 
 # Initialize the .env file
 # Get environment and execute init.sh script
-bash init.sh
+sudo bash init.sh

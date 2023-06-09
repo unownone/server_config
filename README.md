@@ -13,5 +13,5 @@ Create a .env file and put these in.
 # Script:
 
 ```sh
-bash <(curl -l https://raw.githubusercontent.com/unownone/server_config/main/install.sh)
+sudo bash <(curl -l https://raw.githubusercontent.com/unownone/server_config/main/install.sh)
 ```
