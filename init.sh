@@ -16,6 +16,7 @@ USER_EMAIL_ID=${USER_EMAIL_ID}
 DOMAIN=${DOMAIN}
 TRAEFIK_AUTH_PAIRS=${TRAEFIK_AUTH_PAIRS}
 EOF
+    echo "$DOMAIN"
 }
 
 
@@ -28,17 +29,18 @@ if [ -f .env ]; then
     printf "\n"
     printf "Do you want to continue with the existing .env file? (y/n): "
     read CONTINUE
+    domain=""
     if [ "$CONTINUE" = "y" ]; then
         printf "Continuing with existing .env file...\n"
     else
         printf "Creating new env file\n"
-        create_env_file
+        domain=$(create_env_file | awk '{print $1}')
         printf ".env file created successfully\n"
         exit 1
     fi
 else
     printf ".env file does not exist. Creating new .env file...\n"
-    create_env_file
+    domain=$(create_env_file | awk '{print $1}')
     printf ".env file created successfully\n"
 fi
 
@@ -52,4 +54,4 @@ printf "Starting docker-compose...\n"
 
 docker-compose up -d --build
 
-printf "Your Portainer should be accesible at https://console.${DOMAIN}\n"
+printf "Your Portainer should be accesible at https://console.${domain}\n"
