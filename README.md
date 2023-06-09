@@ -12,7 +12,7 @@ Create a .env file and put these in.
 
 # Script:
 
-```bash
+```sh
 wget -q https://raw.githubusercontent.com/unownone/server_config/main/install.sh \
 -O install.sh;sudo bash ./install.sh
 ```
